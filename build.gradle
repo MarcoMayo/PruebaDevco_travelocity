@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+group 'com.sophossolutions'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+}
+
+buildscript{
+    repositories{
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+    dependencies{
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.90")
+    }
+}
+
+ext {
+    serenityVersion = '2.0.90'
+    serenityCucumberVersion = '1.9.49'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    compile group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+
+    testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    compile "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    compile "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    compile "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+    compile "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0'
+
+}
+
+test {0
+    systemProperties System.getProperties()
+    systemProperty "file.encoding", "UTF-8"
+    testLogging.showStandardStreams = true
+    finalizedBy(aggregate)
+}
