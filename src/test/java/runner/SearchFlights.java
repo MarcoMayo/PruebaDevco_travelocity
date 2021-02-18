@@ -7,8 +7,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(glue = "stepsDefinitions",
-        features = "src/test/resources/searh_flights.feature",
+        features = "src/test/resources/search_flights.feature",
         snippets = SnippetType.CAMELCASE
-        ,dryRun = true,tags = "@this")
-public class SearhFlights {
+        ,dryRun = false//,tags = "@Case"
+)
+public class SearchFlights {
 }

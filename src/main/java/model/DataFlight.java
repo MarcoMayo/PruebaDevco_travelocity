@@ -6,6 +6,11 @@ public class DataFlight {
     private String cityDestination;
     private String typeFlight;
     private String dateOrigin;
+    private String warningMessage;
+
+    public String getWarningMessage() {
+        return warningMessage;
+    }
 
     public String getCityOrigin() {
         return cityOrigin;

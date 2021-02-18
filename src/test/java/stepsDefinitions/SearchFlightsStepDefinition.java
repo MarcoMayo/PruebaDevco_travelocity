@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import questions.AirlineFiltered;
 import questions.DetailsFlight;
 import questions.FlightSearched;
+import questions.MessageErroField;
 import tasks.FillFlightData;
 import tasks.SelectAirline;
 import tasks.SelectFlight;
@@ -25,7 +26,7 @@ import static org.hamcrest.Matchers.*;
 import static userInterface.MainPage.TYPE_SERVICE;
 
 
-public class SearhFlightsStepDefinition {
+public class SearchFlightsStepDefinition {
 
     @Managed
     private WebDriver hisBrowser;
@@ -36,8 +37,6 @@ public class SearhFlightsStepDefinition {
         OnStage.theActorCalled("Travelocity user");
         OnStage.theActorInTheSpotlight().can(BrowseTheWeb.with(hisBrowser));
         OnStage.theActorInTheSpotlight().wasAbleTo(Open.url("https://www.travelocity.com/"));
-
-
     }
 
     @Given("^that the user is on the main page$")
@@ -46,8 +45,8 @@ public class SearhFlightsStepDefinition {
     }
 
     @When("^the user enters the information about the flight$")
-    public void theUserEntersTheInformationAboutTheFlight(List<DataFlight> dateFlight) {
-        OnStage.theActorInTheSpotlight().attemptsTo(FillFlightData.inFields(dateFlight.get(0)));
+    public void theUserEntersTheInformationAboutTheFlight(List<DataFlight> dataFlight) {
+        OnStage.theActorInTheSpotlight().attemptsTo(FillFlightData.inFields(dataFlight.get(0)));
     }
 
     @Then("^he should see a flight (.*)$")
@@ -84,5 +83,16 @@ public class SearhFlightsStepDefinition {
         OnStage.theActorInTheSpotlight().should(seeThat(AirlineFiltered.isVisible(airline)));
     }
 
+    @When("^the user enters information about flight with error data")
+    public void theUserEntersInformationAboutFlightWithErrorData(List<DataFlight> dataFlight) {
+        OnStage.theActorInTheSpotlight().remember("message",dataFlight.get(0).getWarningMessage());
+        OnStage.theActorInTheSpotlight().attemptsTo(FillFlightData.inFields(dataFlight.get(0)));
+    }
 
+    @Then("^user should see warning message$")
+    public void userShouldSeeWarningMessage() {
+        String messageError = OnStage.theActorInTheSpotlight().recall("message");
+        OnStage.theActorInTheSpotlight().should(seeThat(MessageErroField.cityDestination()
+                ,is(equalTo(messageError))));
+    }
 }

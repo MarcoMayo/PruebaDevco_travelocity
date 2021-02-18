@@ -29,4 +29,7 @@ public class MainPage {
 
     public static final Target BUTTON_SEARCH_DATE = Target.the("button search date")
             .locatedBy("//button[contains(text(),'Search')]");
+
+    public static final Target MESSAGE_ERROR = Target.the("message error in destination field")
+            .locatedBy("//div[@id='location-field-leg1-destination-input-error']");
 }
