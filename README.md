@@ -14,7 +14,7 @@ La aplicación de Automatización Travelocity cuenta con 3 escenarios:
 
 * **Nombre:** Automatización Travelocity.
 * **Lenguaje de programación:** Java.  
-* **Frameworks:** Selenium, JUnit y Serenity BDD.  
+* **Frameworks:** Selenium, Cucumber y Serenity BDD.  
 * **Patrón de diseño:** Screenplay.  
 * **Feature:** Hecho en lenguaje Gherkin.  
 * **IDE:** Intellij  
