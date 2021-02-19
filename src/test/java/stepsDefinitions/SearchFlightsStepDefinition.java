@@ -1,9 +1,12 @@
 package stepsDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import interactions.Switch;
 import model.DataFlight;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
@@ -12,10 +15,8 @@ import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
-import questions.AirlineFiltered;
-import questions.DetailsFlight;
-import questions.FlightSearched;
-import questions.MessageErroField;
+import questions.*;
+import tasks.AddHotel;
 import tasks.FillFlightData;
 import tasks.SelectAirline;
 import tasks.SelectFlight;
@@ -94,5 +95,15 @@ public class SearchFlightsStepDefinition {
         String messageError = OnStage.theActorInTheSpotlight().recall("message");
         OnStage.theActorInTheSpotlight().should(seeThat(MessageErroField.cityDestination()
                 ,is(equalTo(messageError))));
+    }
+
+    @And("^he decided to add a hotel until \"([^\"]*)\"$")
+    public void heDecidedToAddAHotelUntil(String date) {
+        OnStage.theActorInTheSpotlight().attemptsTo(AddHotel.until(date));
+    }
+
+    @Then("^he should see a new page with the available hotels$")
+    public void heShouldSeeANewPageWithTheAvailableHotels() {
+        OnStage.theActorInTheSpotlight().should(seeThat(HotelsNewWindow.isVisible()));
     }
 }

@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(glue = "stepsDefinitions",
         features = "src/test/resources/search_flights.feature",
         snippets = SnippetType.CAMELCASE
-        ,dryRun = false//,tags = "@Case"
 )
 public class SearchFlights {
 }

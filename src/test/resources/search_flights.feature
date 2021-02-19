@@ -24,8 +24,6 @@ Feature:  I need to go to the main page of travelocity
     Then he should see  "Avianca" flights only
 
 
-  ##Scenario: Select roundtrip flight with car
-
   Scenario Outline: Fill in the city of origin and destination with empty spaces.
     Given that the user is on the main page
     When the user enters information about flight with error data
@@ -37,3 +35,12 @@ Feature:  I need to go to the main page of travelocity
       | cityOrigin | cityDestination | typeFlight | dateOrigin    | warningMessage                                    |
       | medellin   |                 | One-way    | Apr 13, 2021. | Please select a destination                       |
       | medellin   | medellin        | One-way    | Apr 13, 2021. | Please choose a different destination from origin |
+
+  @Case
+  Scenario: Open poopUp hotel
+    Given Given the user searched for a flight with the following data
+      | cityOrigin | cityDestination | typeFlight | dateOrigin   |
+      | Miami      | Boston          | One-way    | Mar 6, 2021. |
+    When the user selects a flight
+    And he decided to add a hotel until "Mar 20, 2021"
+    Then he should see a new page with the available hotels
