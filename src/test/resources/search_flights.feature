@@ -1,5 +1,5 @@
 Feature:  I need to go to the main page of travelocity
-  to book and check flights and hotels.
+  to book and check flights of type One-way.
 
   Scenario: Search one-way flight
     Given that the user is on the main page
@@ -26,7 +26,6 @@ Feature:  I need to go to the main page of travelocity
 
   ##Scenario: Select roundtrip flight with car
 
-  @Case
   Scenario Outline: Fill in the city of origin and destination with empty spaces.
     Given that the user is on the main page
     When the user enters information about flight with error data
