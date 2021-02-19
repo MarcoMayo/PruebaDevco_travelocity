@@ -25,7 +25,7 @@ public class AirlineFiltered implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-        WebDriverWait wait = new WebDriverWait(driver,300);
+        WebDriverWait wait = new WebDriverWait(driver,5);
 
         wait.until(ExpectedConditions.visibilityOf(BUTTON_CLEAR_FILTER.resolveFor(actor)));
         arrayAirlines = Text.of(AIRLINE_OPERATED).viewedBy(actor).asList();

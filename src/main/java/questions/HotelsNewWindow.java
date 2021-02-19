@@ -16,7 +16,7 @@ public class HotelsNewWindow implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 300);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
         actor.attemptsTo(Switch.timeSheetWindow());
         wait.until(ExpectedConditions.invisibilityOf(LOADER.resolveFor(actor)));

@@ -14,7 +14,7 @@ public class FlightSearched implements Question <String> {
     @Override
     public String answeredBy(Actor actor) {
         WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-        WebDriverWait wait = new WebDriverWait(driver,300);
+        WebDriverWait wait = new WebDriverWait(driver,5);
 
         wait.until(ExpectedConditions.visibilityOf(VISIBILITY_FLIGHTS.resolveFor(actor)));
         return Text.of(FLIGHTS_SEARCHED).viewedBy(actor).asString();
